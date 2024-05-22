@@ -4,8 +4,8 @@ name: deploy-bootstrap-cli
 on:
     push:
         branches:
-            #- main
-            - none
+            - main
+            #- none
         paths:
             - config/bootstrap/**
             - .github/workflows/deploy-bootstrap-cli.yaml
@@ -16,7 +16,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                environment: [test, prod]
+                environment: [prod]
                 include:
                     - environment: test
                       # CDF cluster, like bluefield, greenfield or westeurope-1
@@ -27,11 +27,11 @@ jobs:
                       IDP_TENANT: [AAD tenant id]
                     - environment: prod
                       # CDF cluster, like bluefield, greenfield or westeurope-1
-                      CDF_CLUSTER: [CDF cluster]
+                      CDF_CLUSTER: az-eastus-1
                       # CDF Project name
-                      CDF_PROJECT: [CDF project]
+                      CDF_PROJECT: hieunguyen
                       # Azure AD tenant id
-                      IDP_TENANT: [AAD tenant id]
+                      IDP_TENANT: b7ac094b-ffd9-4c96-a67d-eab64a07eca3
 
         environment: ${{ matrix.environment}}
         env:
