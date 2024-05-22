@@ -56,28 +56,42 @@ bootstrap:
     # Mapping between IDP (Azure Active Directory) groups and CDF groups.
     idp-cdf-mappings:
     # Support multiple CDF Projects, like dev/test/prod in one config.
-        - cdf-project: <CDF project name> # i.e. bootcamp-01-test
+        - cdf-project: hieunguyen # i.e. bootcamp-01-test
           mappings:
               - cdf-group: cdf:root
-                idp-source-id: <AAD Group Object id>
-                idp-source-name: <AAD Group name>
+                idp-source-id: 9544858e-4a67-44f1-89fe-0fea19095150
+                idp-source-name: hieunguyen-admin
               - cdf-group: cdf:all:owner
-                idp-source-id: <AAD Group Object Id> # for the AAD Group to be matched to cdf-group
-                idp-source-name: <AAD Group name> # i.e. bootcamp-01-test-all-owner
+                idp-source-id: 4e3c897e-6f85-43c9-aeb1-3ec281b80a93 # for the AAD Group to be matched to cdf-group
+                idp-source-name: hieunguyen-all-owner # i.e. bootcamp-01-test-all-owner
               - cdf-group: cdf:all:read
-                idp-source-id: <AAD Group Object Id> # for the AAD Group to be matched to cdf-group
-                idp-source-name: <AAD Group name> # i.e. bootcamp-01-test-all-read
+                idp-source-id: 3ec289c6-5d07-4dc1-8928-7dd5749fa80a # for the AAD Group to be matched to cdf-group
+                idp-source-name: hieunguyen-all-read # i.e. bootcamp-01-test-all-read
 
 
     namespaces:
         # Typical config will have a namespace for data sources ("src") and a namespace for use cases ("uc")
-        - ns-name: <Namespace name>
+        - ns-name: src
           description: Data sources for the Ice Cream Factory # HINT
 
           # Node names will normally follow src:001:srcname or uc:001:usecasename naming convention
           ns-nodes:
-              - node-name: <Node name>
+              - node-name: src:001:sap
                 description: Data from SAP # HINT
+              - node-name: src:002:opcua
+                description: Data from OPCUA # HINT
+        # HINT: Add another namespace below
+        - ns-name: uc
+          description: Data sources for the Ice Cream Factory # HINT
+
+          # Node names will normally follow src:001:srcname or uc:001:usecasename naming convention
+          ns-nodes:
+              - node-name: uc:001:oee
+                description: Use case 001 Over all Equipment effectiveness # HINT
+                shared-access:
+                    read:
+                        - node-name: src:001:sap
+                        - node-name: src:002:opcua
         # HINT: Add another namespace below
 
 
